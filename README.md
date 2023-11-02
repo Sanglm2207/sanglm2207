@@ -1,5 +1,5 @@
 ### Hey there <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="25px">
-<a href="https://twitter.com/sanglm2207">
+<a href="https://twitter.com/kaidev99">
   <img align="left" alt="Lại Minh Sáng | Twitter" width="22px" src="https://raw.githubusercontent.com/peterthehan/peterthehan/master/assets/twitter.svg" />
 </a>
 <a href="https://www.linkedin.com/in/minh-s%C3%A1ng-l%E1%BA%A1i-8a5711171/">
@@ -19,7 +19,7 @@ Hi, I'm [Sáng!] a passionate self-taught Full Stack Web Developer 🚀 from Vie
 - 👨🏽‍💻 I’m currently working on something cool :wink:;
 - 🌱 I’m currently learning Typescript; 
 - 💬 Ask me about anything, I am happy to help;
-- 📫 How to reach me: [@sanglm2207](https://twitter.com/sanglm2207);
+- 📫 How to reach me: [@kaidev99](https://twitter.com/sanglm2207);
 
 **Languages and Tools:**  
 
@@ -36,7 +36,7 @@ Hi, I'm [Sáng!] a passionate self-taught Full Stack Web Developer 🚀 from Vie
 
 If you like what I do, maybe consider buying me a coffee/tea 🥺👉👈
 
-<a href="https://www.facebook.com/sanglm2207" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" width="150" ></a>
+<a href="https://www.facebook.com/kaidev99" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" width="150" ></a>
 
 
 
