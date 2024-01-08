@@ -1,14 +1,4 @@
 ### Hey there <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="25px">
-<a href="https://twitter.com/kaidev99">
-  <img align="left" alt="Lại Minh Sáng | Twitter" width="22px" src="https://raw.githubusercontent.com/peterthehan/peterthehan/master/assets/twitter.svg" />
-</a>
-<a href="https://www.linkedin.com/in/minh-s%C3%A1ng-l%E1%BA%A1i-8a5711171/">
-  <img align="left" alt="Lại Minh Sáng" width="22px" src="https://raw.githubusercontent.com/peterthehan/peterthehan/master/assets/linkedin.svg" />
-</a>
-
-![](https://visitor-badge.glitch.me/badge?page_id=sanglm2207.sanglm2207)
-
-<br />
 
 Hi, I'm [Sáng!] a passionate self-taught Full Stack Web Developer 🚀 from Vietnam.
 
@@ -17,9 +7,9 @@ Hi, I'm [Sáng!] a passionate self-taught Full Stack Web Developer 🚀 from Vie
 **Talking about Personal Stuffs:**
 
 - 👨🏽‍💻 I’m currently working on something cool :wink:;
-- 🌱 I’m currently learning Typescript; 
+- 🌱 I’m currently learning Data Engineer; 
 - 💬 Ask me about anything, I am happy to help;
-- 📫 How to reach me: [@kaidev99](https://twitter.com/sanglm2207);
+- 📫 How to reach me: [@kaidev99](https://twitter.com/kaidev99);
 
 **Languages and Tools:**  
 
@@ -33,6 +23,18 @@ Hi, I'm [Sáng!] a passionate self-taught Full Stack Web Developer 🚀 from Vie
 <code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/firebase/firebase.png"></code>
 <code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png"></code>
 
+
+### Badges
+
+<b>My GitHub Stats</b>
+
+<a href="http://www.github.com/Sanglm2207"><img src="https://github-readme-stats.vercel.app/api?username=Sanglm2207&show_icons=true&hide=&count_private=true&title_color=3382ed&text_color=ffffff&icon_color=3382ed&bg_color=000000&hide_border=true&show_icons=true" alt="Sanglm2207's GitHub stats" /></a>
+
+<a href="http://www.github.com/Sanglm2207"><img src="https://github-readme-streak-stats.herokuapp.com/?user=Sanglm2207&stroke=ffffff&background=000000&ring=3382ed&fire=3382ed&currStreakNum=ffffff&currStreakLabel=3382ed&sideNums=ffffff&sideLabels=ffffff&dates=ffffff&hide_border=true" /></a>
+
+<a href="http://www.github.com/Sanglm2207"><img src="https://github-readme-activity-graph.cyclic.app/graph?username=Sanglm2207&bg_color=000000&color=ffffff&line=3382ed&point=ffffff&area_color=000000&area=true&hide_border=true&custom_title=GitHub%20Commits%20Graph" alt="GitHub Commits Graph" /></a>
+
+<a href="https://github.com/Sanglm2207" align="left"><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sanglm2207&langs_count=10&title_color=3382ed&text_color=ffffff&icon_color=3382ed&bg_color=000000&hide_border=true&locale=en&custom_title=Top%20%Languages" alt="Top Languages" /></a>
 
 If you like what I do, maybe consider buying me a coffee/tea 🥺👉👈
 
