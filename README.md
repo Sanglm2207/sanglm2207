@@ -4,12 +4,13 @@ Hi, I'm [Sáng!] a passionate self-taught Full Stack Web Developer 🚀 from Vie
 
   <img align="right" alt="GIF" src="https://github.com/sanglm2207/sanglm2207/blob/master/code.gif?raw=true" width="500" height="320" />
   
-**Talking about Personal Stuffs:**
+## 📱 Let's Connect
 
-- 👨🏽‍💻 I’m currently working on something cool :wink:;
-- 🌱 I’m currently learning Data Engineer; 
-- 💬 Ask me about anything, I am happy to help;
-- 📫 How to reach me: [@kaidev99](https://twitter.com/kaidev99);
+🍓 [kaidev99.com](https://kaidev99.com) ✴️ Creating full-stack web apps & tools for humans ✨🍓  
+✴️ VSCode themes, backend APIs, automation tools, or anything fun? Ping me anytime!  
+
+✴️ Let’s create something amazing together! ✌🏻  
+
 
 **Languages and Tools:**  
 
@@ -26,7 +27,7 @@ Hi, I'm [Sáng!] a passionate self-taught Full Stack Web Developer 🚀 from Vie
 
 If you like what I do, maybe consider buying me a coffee/tea 🥺👉👈
 
-<a href="https://www.facebook.com/kaidev99" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" width="150" ></a>
+<a href="https://buymeacoffee.com/sanglm2207" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" width="150" ></a>
 
 
 
