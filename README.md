@@ -6,7 +6,8 @@ Hi, I'm [Sáng!] a passionate self-taught Full Stack Web Developer 🚀 from Vie
   
 ## 📱 Let's Connect
 
-🍓 [kaidev99.com](https://kaidev99.com) ✴️ Creating full-stack web apps & tools for humans ✨🍓  
+🍓 [kaidev99.com](https://kaidev99.com) 
+✴️ Creating full-stack web apps & tools for humans ✨🍓  
 ✴️ VSCode themes, backend APIs, automation tools, or anything fun? Ping me anytime!  
 
 ✴️ Let’s create something amazing together! ✌🏻  
