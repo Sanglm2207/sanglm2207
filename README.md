@@ -24,18 +24,6 @@ Hi, I'm [Sáng!] a passionate self-taught Full Stack Web Developer 🚀 from Vie
 <code><img height="20" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png"></code>
 
 
-### Badges
-
-<b>My GitHub Stats</b>
-
-<a href="http://www.github.com/Sanglm2207"><img src="https://github-readme-stats.vercel.app/api?username=Sanglm2207&show_icons=true&hide=&count_private=true&title_color=3382ed&text_color=ffffff&icon_color=3382ed&bg_color=000000&hide_border=true&show_icons=true" alt="Sanglm2207's GitHub stats" /></a>
-
-<a href="http://www.github.com/Sanglm2207"><img src="https://github-readme-streak-stats.herokuapp.com/?user=Sanglm2207&stroke=ffffff&background=000000&ring=3382ed&fire=3382ed&currStreakNum=ffffff&currStreakLabel=3382ed&sideNums=ffffff&sideLabels=ffffff&dates=ffffff&hide_border=true" /></a>
-
-<a href="http://www.github.com/Sanglm2207"><img src="https://github-readme-activity-graph.cyclic.app/graph?username=Sanglm2207&bg_color=000000&color=ffffff&line=3382ed&point=ffffff&area_color=000000&area=true&hide_border=true&custom_title=GitHub%20Commits%20Graph" alt="GitHub Commits Graph" /></a>
-
-<a href="https://github.com/Sanglm2207" align="left"><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Sanglm2207&langs_count=10&title_color=3382ed&text_color=ffffff&icon_color=3382ed&bg_color=000000&hide_border=true&locale=en&custom_title=Top%20%Languages" alt="Top Languages" /></a>
-
 If you like what I do, maybe consider buying me a coffee/tea 🥺👉👈
 
 <a href="https://www.facebook.com/kaidev99" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" width="150" ></a>
