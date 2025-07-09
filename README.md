@@ -2,7 +2,7 @@
 
 Hi, I'm [Sáng!] a passionate self-taught Full Stack Web Developer 🚀 from Vietnam.
 
-  <img align="right" alt="GIF" src="https://github.com/sanglm2207/sanglm2207/blob/master/code.gif?raw=true" width="500" height="320" />
+  <img align="right" alt="GIF" src="https://github.com/sanglm2207/sanglm2207/blob/master/code.gif?raw=true" width="400" height="300" />
   
 ## 📱 Let's Connect
 
