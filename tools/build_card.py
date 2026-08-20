@@ -27,7 +27,7 @@ MAG, PINK, ORANGE, YELLOW = "#d2a8ff", "#ff7bd7", "#ffa657", "#e3b341"
 MONO = ("'SF Mono','SFMono-Regular',ui-monospace,'DejaVu Sans Mono',"
         "Menlo,Consolas,'Liberation Mono',monospace")
 
-HANDLE = "cantyoudobetter"
+HANDLE = "sanglm2207 / kaidev99"
 SEP    = "  ·  "
 
 def P(t, c=FG):  return [(t, c)]                      # a plain line
@@ -169,7 +169,7 @@ def text(x, y, segs, fs, weight="400", extra=""):
     add(f'<text x="{x:.1f}" y="{y:.1f}" font-family="{MONO}" font-size="{fs}" '
         f'font-weight="{weight}" xml:space="preserve"{extra}>{parts}</text>')
 
-ALT = ("Terminal-style profile card for Michael Bordelon (cantyoudobetter): CTO at "
+ALT = ("Terminal-style profile card for Michael Bordelon (sanglm2207): CTO at "
        "Ways2Well and ReviveRX, building AI-native healthcare, clinical intimacy at "
        "scale, human optimization and longevity, and agentic systems. Still curious, "
        "still building.")
