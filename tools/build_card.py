@@ -1,0 +1,260 @@
+#!/usr/bin/env python3
+"""Build assets/card.svg -- the terminal-style profile card.
+
+GitHub markdown strips CSS, so the styled layout is rendered into an SVG that
+is committed to the repo and referenced with <img> from README.md.
+
+Sizing constraint: GitHub's profile-README column maxes out at ~846px wide, and
+an <img> is scaled down to fit it. So the card's *character density* -- not its
+pixel size -- decides legibility. Keep W near LEGIBLE_W and keep value lines
+under VALUE_COLS; the assert at the bottom guards this.
+
+    python3 tools/build_card.py
+"""
+import os, html, textwrap
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+
+LEGIBLE_W = 846          # GitHub profile README container width
+VALUE_COLS = 45          # max chars in a value line
+
+# ---------------------------------------------------------------- palette
+BG, CARD, BORDER = "#06070a", "#0a0d12", "#1b2230"
+DIM, FG, WHITE, ART = "#6e7681", "#adbac7", "#e6edf3", "#9aa7b4"
+GREEN, BLUE, CYAN = "#7ee787", "#79c0ff", "#56d4dd"
+MAG, PINK, ORANGE, YELLOW = "#d2a8ff", "#ff7bd7", "#ffa657", "#e3b341"
+MONO = ("'SF Mono','SFMono-Regular',ui-monospace,'DejaVu Sans Mono',"
+        "Menlo,Consolas,'Liberation Mono',monospace")
+
+HANDLE = "cantyoudobetter"
+SEP    = "  ·  "
+
+def P(t, c=FG):  return [(t, c)]                      # a plain line
+def B(t, c=FG):  return [(">  ", DIM), (t, c)]        # a bulleted line
+def J(*parts):                                        # join with dim separators
+    out = []
+    for i, p in enumerate(parts):
+        if i: out.append((SEP, DIM))
+        out.append(p if isinstance(p, tuple) else (p, FG))
+    return out
+
+DIV = (None, None, None)
+
+ROWS = [
+    ("Role:",      GREEN, [P("Freelance Software Engineer")]),
+    ("Mission:",   GREEN, [P("Build reliable systems."), P("Turn complexity into simplicity.")]),
+    ("Home Base:", GREEN, [P("Vietnam / wherever the Wi-Fi works")]),
+    ("Education:", GREEN, [[("Self-taught ", FG), ("— Software Engineering + Data Engineering", DIM)]]),
+    DIV,
+    ("Languages.Code:",  BLUE, [P("Java, JavaScript/TypeScript, Python,"),
+                                [("SQL, Node.js, React ", FG),
+                                 ("+ whatever the system needs", DIM)]]),
+    ("Languages.Human:", BLUE, [J("Vietnamese", "English", "C1/C2 mindset"),
+                                J("Code", "Architecture", "Systems")]),
+    DIV,
+    ("Currently:", GREEN, [B("Data Engineering from zero to hero"), B("AI-native engineering"),
+                           B("Distributed systems + architecture"), B("Building with Java + Python"),
+                           B("Still shipping actual code", WHITE)]),
+    DIV,
+    ("Previously:", BLUE, [B("Fullstack development"), B("Backend systems + enterprise applications"),
+                           B("Java + Spring Boot"), B("Node.js + React"),
+                           B("Mobile + desktop platforms"), B("Automation + technical products")]),
+    DIV,
+    ("Side.Quests:", GREEN, [J(("Mechanical Keyboards ⌨", CYAN), "New tech"),
+                             J("Running", "Daily discipline", "Remote Work"),
+                             J("Learning", "Thinking about systems"),
+                             J("Fighting complexity")]),
+    DIV,
+    ("Books:", ORANGE, [J("Engineering", "Data + AI")]),
+    DIV,
+    ("Operating.System:", YELLOW, [P("Always Be Building"),
+                                   P("Stay curious + practical"),
+                                   P("Discipline without obsession"),
+                                   P("Fight unnecessary complexity"),
+                                   P("Keep learning + shipping")]),
+    DIV,
+    ("Current.Hypothesis:", PINK, [P("Technology's highest leverage comes from"),
+                                   P("understanding systems deeply enough to"),
+                                   P("make complex things feel simple.")]),
+]
+
+STATUS = ["Still curious.", "Still building.", "Still sharpening the stone."]
+
+# footer laid out 2x2 so each cell gets half the card width
+FOOTER = [
+    ("github.stats", [[("since",     DIM), ("2019",       BLUE)],
+                      [("repos",     DIM), ("189",         BLUE)],
+                      [("languages", DIM), ("5+",         BLUE)],
+                      [("stars",     DIM), ("go ahead",   BLUE)],
+                      [("ego",       DIM), ("negotiable", BLUE)]], "kv"),
+    ("currently.building", [[("◈ ", CYAN),   ("AI-native healthcare platform", FG)],
+                            [("★ ", YELLOW), ("Clinical workflows, humans first", FG)],
+                            [("◈ ", CYAN),   ("Agentic systems that cut friction", FG)],
+                            [("◈ ", CYAN),   ("Dev experience that doesn't suck", FG)]], "seg"),
+    # ("family.tree", [[("Sheri  ", BLUE), ("Events By Sheri, LLC", FG)],
+    #                  [("Blake  ", BLUE), ("AI PhD, Researcher at SpaceXAI", FG)],
+    #                  [("Grant  ", BLUE), ("Tech and Ops at SF 49ers", FG)],
+    #                  [("Jayce  ", BLUE), ("Tech Lead @ TasteLabs", FG)],
+    #                  [("Zoe    ", BLUE), ("Canine Extraordinaire", FG)]], "seg"),
+    ("contact.ping", [[("✉  ", DIM), ("sanglm2207@gmail.com", FG)],
+                      [("✕  ", DIM), ("x.com/kaidev99", FG)],
+                      [("in ", DIM), ("linkedin.com/in/kaidev99", FG)]], "seg"),
+]
+
+# ---------------------------------------------------------------- geometry
+PAD        = 26
+A_FS, A_LH = 12.0, 12.8       # portrait
+R_FS, R_LH = 14.0, 20.5       # info rows
+F_FS, F_LH = 13.0, 18.5       # footer
+A_ADV, R_ADV, F_ADV = A_FS*0.6, R_FS*0.6, F_FS*0.6
+R_GAP, LABEL_COLS, GUTTER, TITLE_H = 12.0, 21, 30, 84
+S_FS, S_LH = 13.0, 18.5       # status block under the portrait
+LEFT_EXTRA = 30 + 20 + len(["x"]*3)*S_LH   # gap + header + status lines
+
+art = [l for l in open(os.path.join(HERE, "art.txt")).read().split("\n") if l.strip()]
+ART_COLS = max(len(l) for l in art)
+art = [l.ljust(ART_COLS) for l in art]
+
+def seg_len(segs): return sum(len(t) for t, _ in segs)
+
+def wrap_segs(segs, width):
+    """Wrap a list of colored text segments into multiple segment-lines.
+
+    Returns a list of segs (each segs is a list of (text,color)) where each
+    segs' concatenated text length is <= width.
+    """
+    full = ''.join(t for t, _ in segs)
+    # Use textwrap to produce reasonable break points
+    wrapped = textwrap.wrap(full, width=width)
+    if not wrapped:
+        return [[]]
+    out = []
+    # consume characters from the original segments to recreate colored pieces
+    seg_i = 0
+    off = 0
+    for line in wrapped:
+        want = len(line)
+        cur = []
+        while want > 0 and seg_i < len(segs):
+            t, c = segs[seg_i]
+            take = min(want, len(t) - off)
+            part = t[off:off+take]
+            cur.append((part, c))
+            want -= take
+            off += take
+            if off >= len(t):
+                seg_i += 1
+                off = 0
+        out.append(cur)
+    return out
+
+LEFT_W  = ART_COLS * A_ADV
+RIGHT_W = LABEL_COLS*R_ADV + VALUE_COLS*R_ADV
+right_x = PAD + LEFT_W + GUTTER
+W = int(right_x + RIGHT_W + PAD)
+
+rows_h = sum(R_GAP if lab is None else len(ls)*R_LH for lab, _, ls in ROWS)
+BODY_H = max(len(art)*A_LH + LEFT_EXTRA, 34 + rows_h)
+FOOT_ROW = 24 + 5*F_LH + 14
+FOOT_H   = 2*FOOT_ROW + 12
+H = int(TITLE_H + BODY_H + 30 + FOOT_H + PAD)
+
+# ---------------------------------------------------------------- emit
+o, add = [], lambda s: o.append(s)
+esc = lambda s: html.escape(s, quote=False)
+
+def text(x, y, segs, fs, weight="400", extra=""):
+    parts = "".join(f'<tspan fill="{c}">{esc(t)}</tspan>' for t, c in segs)
+    add(f'<text x="{x:.1f}" y="{y:.1f}" font-family="{MONO}" font-size="{fs}" '
+        f'font-weight="{weight}" xml:space="preserve"{extra}>{parts}</text>')
+
+ALT = ("Terminal-style profile card for Michael Bordelon (cantyoudobetter): CTO at "
+       "Ways2Well and ReviveRX, building AI-native healthcare, clinical intimacy at "
+       "scale, human optimization and longevity, and agentic systems. Still curious, "
+       "still building.")
+
+add(f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" '
+    f'viewBox="0 0 {W} {H}" role="img" aria-label="{esc(ALT)}">')
+add(f'<rect width="{W}" height="{H}" rx="14" fill="{BG}"/>')
+add(f'<rect x="8" y="8" width="{W-16}" height="{H-16}" rx="11" fill="{CARD}" stroke="{BORDER}"/>')
+
+for i, c in enumerate(("#ff5f57", "#febc2e", "#28c840")):
+    add(f'<circle cx="{PAD + i*20}" cy="38" r="6.5" fill="{c}"/>')
+text(PAD, 76, [(HANDLE, WHITE), (" / ", DIM), ("README.md", FG)], 15, "600")
+text(right_x, 44, [(HANDLE, GREEN)], 16, "600")
+add(f'<line x1="{right_x}" y1="56" x2="{W-PAD}" y2="56" stroke="{BORDER}" stroke-dasharray="4 5"/>')
+
+# portrait, vertically centred in the left pane
+ay = TITLE_H + 30 + max(0, (BODY_H - (len(art)*A_LH + LEFT_EXTRA)) / 2)
+for i, line in enumerate(art):
+    text(PAD, ay + i*A_LH, [(line, ART)], A_FS,
+         extra=f' textLength="{LEFT_W:.1f}" lengthAdjust="spacing"')
+py = ay + len(art)*A_LH + 30
+text(PAD, py, [("Status:", GREEN)], 13.5, "600")
+for i, line in enumerate(STATUS):
+    text(PAD, py + 20 + i*S_LH, [(">  ", DIM), (line, FG)], S_FS)
+
+# info rows
+y = TITLE_H + 34
+# Preprocess rows: wrap any value lines that exceed VALUE_COLS
+PROCESSED_ROWS = []
+for lab, lc, ls in ROWS:
+    if lab is None:
+        PROCESSED_ROWS.append((None, None, None))
+        continue
+    new_ls = []
+    for segs in ls:
+        if seg_len(segs) <= VALUE_COLS:
+            new_ls.append(segs)
+        else:
+            for piece in wrap_segs(segs, VALUE_COLS):
+                new_ls.append(piece)
+    PROCESSED_ROWS.append((lab, lc, new_ls))
+
+for lab, lc, ls in PROCESSED_ROWS:
+    if lab is None:
+        yy = y - R_LH + 9
+        add(f'<line x1="{right_x}" y1="{yy:.1f}" x2="{W-PAD}" y2="{yy:.1f}" stroke="{BORDER}"/>')
+        y += R_GAP
+        continue
+    text(right_x, y, [(lab, lc)], R_FS, "600")
+    for line in ls:
+        text(right_x + LABEL_COLS*R_ADV, y, line, R_FS)
+        y += R_LH
+
+# footer 2x2
+fy = TITLE_H + BODY_H + 20
+add(f'<rect x="{PAD-12}" y="{fy}" width="{W-2*(PAD-12)}" height="{FOOT_H}" rx="8" '
+    f'fill="none" stroke="{BORDER}"/>')
+half = (W - 2*(PAD-12)) / 2
+for idx, (title, items, kind) in enumerate(FOOTER):
+    cx = PAD + (idx % 2) * half
+    cy = fy + 14 + (idx // 2) * FOOT_ROW
+    text(cx, cy + 14, [(title, GREEN)], 12.5, "600")
+    for j, segs in enumerate(items):
+        yy = cy + 14 + 20 + j*F_LH
+        if kind == "kv":
+            text(cx, yy, [segs[0]], F_FS)
+            text(cx + 22*F_ADV, yy, [segs[1]], F_FS)
+        else:
+            text(cx, yy, segs, F_FS)
+add('</svg>')
+
+open(os.path.join(ROOT, "assets", "card.svg"), "w").write("\n".join(o) + "\n")
+
+# guard the legibility budget (check against the processed rows we rendered)
+over = [ (lab, seg_len(l)) for lab, _, ls in PROCESSED_ROWS if ls for l in ls if seg_len(l) > VALUE_COLS ]
+scale = LEGIBLE_W / W
+print(f"wrote assets/card.svg  {W}x{H}")
+print(f"at GitHub width {LEGIBLE_W}: scale {scale:.2f}, "
+      f"info text {R_FS*scale:.1f}px, footer {F_FS*scale:.1f}px, art {A_FS*scale:.1f}px")
+if over: print("OVER BUDGET:", over)
+assert not over, "value lines exceed VALUE_COLS"
+
+# Regenerating the portrait from the source photo:
+#   sips -c 1240 1000 tools/photo-source.jpg --out /tmp/c.jpg
+#   sips -c 1240 700  /tmp/c.jpg            --out /tmp/h.jpg
+#   python3 tools/asciify.py /tmp/h.jpg --cols 44 --gamma 0.85 --floor 0.20 \
+#       --ceil 0.71 --bg-thresh 240 --bg-soft 120 --bg-sat 0.10 \
+#       --ramp '  .:-=+*#%@' --despeckle 3 --pad --out tools/art.txt
